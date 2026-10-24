@@ -1,7 +1,7 @@
 public class Vampire extends Enemy implements CanHeal{
 
-    public Vampire(int maxHp, int damage) {
-        super("Vampire", maxHp, damage);        //nem kell külön név, a név "Vampire", mert egy vámpír
+    public Vampire(String name, int maxHp, int damage) {
+        super(name, maxHp, damage, EnemyType.VAMPIRE);        //nem kell külön név, a név "Vampire", mert egy vámpír
     }
 
     @Override
