@@ -1,10 +1,10 @@
 public class Player extends Entity implements CanHeal{
-    private double defense;
     private static Player instance;
+    private int coins;
 
     private Player(String name, int maxHp, int damage, double defense) {
-        super(name, maxHp, damage);
-        this.defense = defense;
+        super(name, maxHp, damage, defense);
+        this.coins= 0;      //kezdetben nincs pénze
     }
 
     //Singleton, csak egy player lehet egyszerre
@@ -15,26 +15,30 @@ public class Player extends Entity implements CanHeal{
         return instance;
     }
 
-    //kell egyáltalán?
-    public static Player getInstance() {
-        return instance;
-    }
-
     //új játékos létrehozása
     public static void newPlayer(String name, int maxHp, int damage, double defense) {
         instance = new Player(name, maxHp, damage, defense);
     }
 
-    public double getDefense() {return defense;}
-    public void setDefense(double defense) {this.defense = defense;}
+    public int getCoins(){return coins;}
+    public void setCoins(int coins) {this.coins = coins;}
+    public void addCoins(int coins){this.coins += coins;}
 
     @Override
     public void heal(int amount) {
         if (amount>=0 && this.isAlive()) {        //csak pozitív irányba lehessen gyógyulni, a 0-t még engedem
             this.setHp(this.getHp() + amount);
+            System.out.println(this.getName() + " heals!");
             if (this.getHp() > this.getMaxHp()) {this.setHp(this.getMaxHp());}      //ha többre heal-elne, visszaállítom maxra
         }
     }
 
-
+    @Override
+    public void getStats() {
+        System.out.println("Name: " + this.getName());
+        System.out.println("Health: " + this.getHp() + "/" + this.getMaxHp());
+        System.out.println("Attack damage: " + this.getDamage());
+        System.out.println("Defense: " + this.getDefense());
+        System.out.println("Coins: " + this.getCoins());
+    }
 }

@@ -1,9 +1,18 @@
 //game idea: The health and attack of boss influenced by the things got bought? Like leviathan escaping from your body?
 
 public class Leviathan extends Enemy implements CanHeal{        //This will be the Boss
+    private static final double CHANCE_TO_DOUBLEHIT=0.5;    //has a chance to attack 2 or 3 times instead of one
+    private static final int AMOUNT_HEALED=7;
 
     public Leviathan(String name, int maxHp, int damage) {
         super(name, maxHp, damage, EnemyType.LEVIATHAN);
+    }
+
+    public double getChanceToDoublehit() {
+        return CHANCE_TO_DOUBLEHIT;
+    }
+    public int getAmountHealed() {
+        return AMOUNT_HEALED;
     }
 
     @Override
