@@ -7,4 +7,8 @@ public class Shapeshifter extends Enemy{
 
     public double getChanceToDodge() {return CHANCE_TO_DODGE;}
 
+    @Override
+    public OutCome fight(Player player) {   //azért nem itt specifikálom, hogy a különböző harctípusok egy helyen, a Fight osztályban legyenek
+        return Fight.fight(player, this);
+    }
 }

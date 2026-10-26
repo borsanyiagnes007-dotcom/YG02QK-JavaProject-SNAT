@@ -23,4 +23,9 @@ public class Leviathan extends Enemy implements CanHeal{        //This will be t
         }
 
     }
+
+    @Override
+    public OutCome fight(Player player) {
+        return Fight.fight(player, this);
+    }
 }

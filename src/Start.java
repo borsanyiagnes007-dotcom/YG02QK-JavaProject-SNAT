@@ -13,6 +13,7 @@ public class Start {
         Misc.screenSpace();
         Player player = Player.getInstance(input.getInput("What is your name, brave hero? \n"), 100, 10, 0);
         System.out.println("Welcome, "+ player.getName() + "! These are your starting stats:");
+        player.getStats();
         return player;
     }
 }

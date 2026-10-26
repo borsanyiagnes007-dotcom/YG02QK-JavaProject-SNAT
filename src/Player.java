@@ -1,10 +1,15 @@
 public class Player extends Entity implements CanHeal{
     private static Player instance;
     private int coins;
+    private boolean isEating;
+    private boolean useSalt;
+
 
     private Player(String name, int maxHp, int damage, double defense) {
         super(name, maxHp, damage, defense);
         this.coins= 0;      //kezdetben nincs pénze
+        this.isEating = false;
+        this.useSalt = false;
     }
 
     //Singleton, csak egy player lehet egyszerre
@@ -23,6 +28,17 @@ public class Player extends Entity implements CanHeal{
     public int getCoins(){return coins;}
     public void setCoins(int coins) {this.coins = coins;}
     public void addCoins(int coins){this.coins += coins;}
+    public boolean isEating(){return isEating;}
+    public void setEating(boolean isEating){this.isEating = isEating;}
+    public boolean isUseSalt(){return useSalt;}
+    public void setUseSalt(boolean useSalt){this.useSalt = useSalt;}
+    public double getIncreasedDamage(){
+        if (this.useSalt) {
+            return 2.5;
+        } else {return 1;}
+    }
+
+
 
     @Override
     public void heal(int amount) {
@@ -40,5 +56,14 @@ public class Player extends Entity implements CanHeal{
         System.out.println("Attack damage: " + this.getDamage());
         System.out.println("Defense: " + this.getDefense());
         System.out.println("Coins: " + this.getCoins());
+    }
+
+    @Override
+    public int attack(Entity target) {
+        int lose=(int) ((this.getDamage()-this.getDamage()*target.getDefense())*this.getIncreasedDamage());
+        //if (this.) {}
+        target.setHp(target.getHp() - lose);
+        this.setUseSalt(false);     //mindig false-ra állítom, ezért csak egyszer támad erősebbet, ha használom a sót
+        return lose;
     }
 }

@@ -1,11 +1,20 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class Fight {
+    private static Input input = new Input();
 
     //overload, mert a harc mechanikája változik az ellenféltől függően
     // a visszatérési érték Outcome típusú, ami megmondja, hogy meghalt-e valamelyik fél és ha igen, melyik.
     public static OutCome fight(Player player, Vampire vampire) {
-        Misc.screenSpace();
-
-        System.out.println("You attack " + vampire.getName() + "! It loses " + player.attack(vampire) + " hp!");
+        //Misc.screenSpace();
+        if (player.isEating() || player.isUseSalt()) {        //ha eszek, nem támadok de engem támadnak
+            player.setEating(false);
+        } else {
+            System.out.println("You attack " + vampire.getName() + "! It loses " + player.attack(vampire) + " hp!");
+        }
+        System.out.println();
         if (!vampire.isAlive()) { return OutCome.PLAYERWIN;}
         else {
             System.out.println(vampire.getName() + " is attacking!");
@@ -22,9 +31,14 @@ public class Fight {
     }
 
     public static OutCome fight(Player player, Demon demon) {
-        Misc.screenSpace();
+        //Misc.screenSpace();
+        if (player.isEating() || player.isUseSalt()) {
+            player.setEating(false);
+        } else {
+            System.out.println("You attack " + demon.getName() + "! It loses " + player.attack(demon) + " hp!");
+        }
 
-        System.out.println("You attack " + demon.getName() + "! It loses " + player.attack(demon) + " hp!");
+        System.out.println();
         if (!demon.isAlive()) { return OutCome.PLAYERWIN; }
         else {
             System.out.println(demon.getName() + " is attacking!");
@@ -45,9 +59,14 @@ public class Fight {
     }
 
     public static OutCome fight (Player player, Shapeshifter shapeshifter) {
-        Misc.screenSpace();
+        //Misc.screenSpace();
+        if (player.isEating() ||  player.isUseSalt()) {
+            player.setEating(false);
+        } else {
+            System.out.println("You attack " + shapeshifter.getName() + "!");
+        }
 
-        System.out.println("You attack " + shapeshifter.getName() + "!");
+        System.out.println();
         if (Math.random() < shapeshifter.getChanceToDodge()) {
             System.out.println(shapeshifter.getName() + " takes on the appearance of a loved one. Your hands tremble and you miss.");
         }
@@ -66,9 +85,14 @@ public class Fight {
     }
 
     public static OutCome fight (Player player, Leviathan leviathan) {
-        Misc.screenSpace();
+        //Misc.screenSpace();
+        if (player.isEating() || player.isUseSalt()) {
+            player.setEating(false);
+        } else {
+            System.out.println("You attack " + leviathan.getName() + "! It loses " + player.attack(leviathan) + " hp!");
+        }
 
-        System.out.println("You attack " + leviathan.getName() + "! It loses " + player.attack(leviathan) + " hp!");
+        System.out.println();
         if (!leviathan.isAlive()) { return OutCome.PLAYERWIN; }
         else {
             if (Math.random() < leviathan.getChanceToDoublehit()) {
@@ -84,5 +108,71 @@ public class Fight {
             leviathan.heal(leviathan.getAmountHealed());
             return OutCome.NONE;
         }
+    }
+
+    public static void wave(Player player, boolean boss) {      //valami nem jó a screenspace-el, mert healelésnél elugrik és attack lesz
+
+        Enemy enemy;
+        if (boss) {
+            enemy= new Leviathan("Leviathan", 200, 20);
+        }
+        else {
+            int choice = (int) (Math.random() * 3);       //nem lehet harom vagy tobb
+            if (choice == 0) {
+                enemy = new Vampire("Vampire", 50, 5);        //Could be configured to have it read from a file
+                System.out.println("You stumble upon a vampire!");
+            } else if (choice == 1) {
+                enemy = new Shapeshifter("Shapeshifter", 70, 7);
+                System.out.println("You stumble upon a shapeshifter!");
+            } else {
+                enemy = new Demon("Demon", 80, 6);
+                System.out.println("You stumble upon a demon!");
+            }
+        }
+
+        OutCome win=OutCome.NONE;
+        do {
+            //Misc.screenSpace();
+            System.out.println("Your stats:");
+            player.getStats();
+            System.out.println("\nYour enemy's stats:");
+            enemy.getStats();
+            System.out.println();
+            ArrayList<String> options = new ArrayList<>(List.of("attack", "eat", "salt"));
+            String choice = input.getInput("What are you going to do?", options);
+            Misc.screenSpace();
+            if (Objects.equals(choice, "attack")) {
+                //nothing because this is the standard
+            }
+            else if (Objects.equals(choice, "eat")) {       //enemy should still attack?
+                player.heal(20);
+                player.setEating(true);
+                //Misc.screenSpace();
+                System.out.println("Your hp: " + player.getHp() + "/" + player.getMaxHp());
+
+            }
+            else {
+                player.setUseSalt(true);
+                System.out.println(player.getName() + " uses salt! You'll deal increased damage!");
+            }
+
+            win=enemy.fight(player);
+
+        } while (win==OutCome.NONE);
+
+        Misc.screenSpace();
+        if (win==OutCome.PLAYERWIN) {
+            System.out.println(enemy.getName() + " falls to the ground! Another win for " + player.getName());
+            player.addCoins((int) (5*Game.getDifficulty()));
+            System.out.println("You obtained " + (int) (5*Game.getDifficulty()) + " coins.");
+            Game.raiseDifficulty();
+        } else {
+            System.out.println("You lose the game."); // instead of this, GameOver screen
+            Game.setGameOver(true);
+
+        }
+
+
+
     }
 }

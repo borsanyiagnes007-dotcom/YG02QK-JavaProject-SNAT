@@ -9,4 +9,8 @@ public class Demon extends Enemy{
 
     public double getChanceToPossess() {return CHANCE_TO_POSSES;}
 
+    @Override
+    public OutCome fight(Player player) {
+        return Fight.fight(player, this);
+    }
 }

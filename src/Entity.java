@@ -32,8 +32,6 @@ public abstract class Entity {
         if (this.isAlive()) {this.setHp(this.getHp() - amount);}
     }
 
-    //no heal because not everyone can heal, so interface
-
     public boolean isAlive() {
         if (this.hp <= 0) {return false;}
         return true;

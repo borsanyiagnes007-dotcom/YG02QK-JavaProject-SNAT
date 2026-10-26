@@ -1,6 +1,6 @@
 public class Misc {
     public static void screenSpace() {
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");       //"clearing" the screen - don't want to actually clear the screen, so it can be scrolled back.
     }
 
     public static String getDescription(Enemy enemy) {
