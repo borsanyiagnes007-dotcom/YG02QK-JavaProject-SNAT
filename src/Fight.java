@@ -12,20 +12,24 @@ public class Fight {
         if (player.isEating() || player.isUseSalt()) {        //ha eszek, nem támadok de engem támadnak
             player.setEating(false);
         } else {
-            System.out.println("You attack " + vampire.getName() + "! It loses " + player.attack(vampire) + " hp!");
+            player.attack(vampire);
         }
         System.out.println();
         if (!vampire.isAlive()) { return OutCome.PLAYERWIN;}
         else {
-            System.out.println(vampire.getName() + " is attacking!");
+            //System.out.println(vampire.getName() + " is attacking!");
             if (Math.random() < vampire.getChanceToDrink()) {
                 System.out.println(vampire.getName() + " bites you and drinks your blood! It heals!");
                 vampire.heal(vampire.getAmountHealed());
             }
-            System.out.println("You lose " + vampire.attack(player) + " hp!");
+            vampire.attack(player);
             if (!player.isAlive()) {
                 return OutCome.ENEMYWIN;
             }
+        }
+        if (player.isUseSalt())  {          //átkapcsolom, hogy következő körben támadjon erősen
+            player.setIncreasedDamage(true);
+            player.setUseSalt(false);
         }
         return OutCome.NONE;
     }
@@ -35,7 +39,7 @@ public class Fight {
         if (player.isEating() || player.isUseSalt()) {
             player.setEating(false);
         } else {
-            System.out.println("You attack " + demon.getName() + "! It loses " + player.attack(demon) + " hp!");
+            player.attack(demon);
         }
 
         System.out.println();
@@ -44,15 +48,20 @@ public class Fight {
             System.out.println(demon.getName() + " is attacking!");
             if (Math.random() < demon.getChanceToPossess()) {
                 System.out.println(demon.getName() + " possesses you! You stab yourself.");
-                System.out.println("You lose " + demon.attack(player) + " hp!\nThe demon jumps out of you.");
+                demon.attack(player);
+                System.out.println("The demon jumps out of you.");
                 if (!player.isAlive()) {return OutCome.ENEMYWIN;}
                 else {
                     System.out.println("It attacks again!");
                 }
             }
-            System.out.println("You lose " + demon.attack(player) + " hp!");
+            demon.attack(player);
             if (!player.isAlive()) {
                 return OutCome.ENEMYWIN;
+            }
+            if (player.isUseSalt()) {
+                player.setIncreasedDamage(true);
+                player.setUseSalt(false);
             }
             return OutCome.NONE;
         }
@@ -71,14 +80,20 @@ public class Fight {
             System.out.println(shapeshifter.getName() + " takes on the appearance of a loved one. Your hands tremble and you miss.");
         }
         else {
-            System.out.println("It loses " + player.attack(shapeshifter) + " hp!");
+            player.attack(shapeshifter);
         }
         if (!shapeshifter.isAlive()) { return OutCome.PLAYERWIN; }
         else {
-            System.out.println(shapeshifter.getName() + " is attacking!");
-            System.out.println("You lose " + shapeshifter.attack(player) + " hp!");
+            System.out.println();
+            //System.out.println(shapeshifter.getName() + " is attacking!");
+
+            shapeshifter.attack(player);
             if (!player.isAlive()) {
                 return OutCome.ENEMYWIN;
+            }
+            if (player.isUseSalt()) {
+                player.setIncreasedDamage(true);
+                player.setUseSalt(false);
             }
             return OutCome.NONE;
         }
@@ -89,7 +104,7 @@ public class Fight {
         if (player.isEating() || player.isUseSalt()) {
             player.setEating(false);
         } else {
-            System.out.println("You attack " + leviathan.getName() + "! It loses " + player.attack(leviathan) + " hp!");
+            player.attack(leviathan);
         }
 
         System.out.println();
@@ -98,11 +113,11 @@ public class Fight {
             if (Math.random() < leviathan.getChanceToDoublehit()) {
                 System.out.println("Huge black tentacles spread from " + leviathan.getName() + ". Look out! They are coming from every direction!");
                 for (int i=0; i<(int)(Math.random()*2)+1;i++) {
-                    System.out.println(leviathan.getName() + " is attacking! You lose" + leviathan.attack(player) + " hp!");
+                    leviathan.attack(player);
                     if (!player.isAlive()) {return OutCome.ENEMYWIN;}
                 }
             }
-            System.out.println(leviathan.getName() + " is attacking! You lose" + leviathan.attack(player) + " hp!");
+            leviathan.attack(player);
             if (!player.isAlive()) {return OutCome.ENEMYWIN;}
             System.out.println(leviathan.getName() + " is healing!");
             leviathan.heal(leviathan.getAmountHealed());
@@ -151,7 +166,7 @@ public class Fight {
                 System.out.println("Your hp: " + player.getHp() + "/" + player.getMaxHp());
 
             }
-            else {
+            else if (Objects.equals(choice, "salt")) {
                 player.setUseSalt(true);
                 System.out.println(player.getName() + " uses salt! You'll deal increased damage!");
             }
@@ -160,7 +175,7 @@ public class Fight {
 
         } while (win==OutCome.NONE);
 
-        Misc.screenSpace();
+        //Misc.screenSpace();
         if (win==OutCome.PLAYERWIN) {
             System.out.println(enemy.getName() + " falls to the ground! Another win for " + player.getName());
             player.addCoins((int) (5*Game.getDifficulty()));

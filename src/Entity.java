@@ -23,9 +23,10 @@ public abstract class Entity {
     public double getDefense() {return defense;}
     public void setDefense(double defense) {this.defense = defense;}
 
-    public int attack(Entity target) {
-        target.setHp(target.getHp() - (int) (this.getDamage()-this.getDamage()*target.getDefense()));
-        return (int) (this.getDamage()-this.getDamage()*target.getDefense());
+    public void attack(Entity target) {
+        int amount = (int) (this.getDamage()-this.getDamage()*target.getDefense());
+        target.takeDamage(amount);
+        System.out.println(this.getName() + " attacks! " + target.getName() + " takes " + amount + " damage!");
     }
 
     public void takeDamage(int amount) {

@@ -11,7 +11,12 @@ public class Start {
 
     public static Player initializePlayer() {
         Misc.screenSpace();
-        Player player = Player.getInstance(input.getInput("What is your name, brave hero? \n"), 100, 10, 0);
+        String name="";
+        do {
+            name= input.getInput("What is your name, brave hero? \n");
+        } while (name.isEmpty());        //valami értelmes név legyen, ne lehessen üres
+
+        Player player = Player.getInstance(name, 100, 10, 0);
         System.out.println("Welcome, "+ player.getName() + "! These are your starting stats:");
         player.getStats();
         return player;
