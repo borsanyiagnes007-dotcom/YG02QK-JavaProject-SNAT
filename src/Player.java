@@ -83,43 +83,52 @@ public class Player extends Entity implements CanHeal{
     public int getMaxDamageLevel(){return MAX_DAMAGE_LEVEL;}
 
 
-    public void upgradeDefense() {      //each level raises defense in a linear way until max defense raised
+    public boolean upgradeDefense() {      //each level raises defense in a linear way until max defense raised
         if (this.coins>=this.BASE_COIN_COST*(this.defenseLevel+1)) {
             if (this.raiseDefenseLevel()) {
                 this.setCoins(this.getCoins() - this.BASE_COIN_COST*this.defenseLevel);
                 this.setDefense(this.getMaxDefense()/this.getMaxDefenseLevel()*this.getDefenseLevel());
+                return true;
             } else {
                 System.out.println("Max defense level reached!");
+                return false;
             }
         } else {
             System.out.println("Not enough coins!");
+            return false;
         }
     }
 
-    public void upgradeHealth() {       //each level adds 50 hp to your health
+    public boolean upgradeHealth() {       //each level adds 50 hp to your health
         if (this.coins>=this.BASE_COIN_COST*(this.healthLevel+1)) {
             if (this.raiseHealthLevel()) {
                 this.setCoins(this.getCoins() - this.BASE_COIN_COST*this.healthLevel);
                 this.setMaxHp(this.getMaxHp() + 50);
                 this.setHp(this.getHp()+50);
+                return true;
             } else {
                 System.out.println("Max health level reached!");
+                return false;
             }
         } else {
             System.out.println("Not enough coins!");
+            return false;
         }
     }
 
-    public void upgradeDamage() {
+    public boolean upgradeDamage() {
         if (this.coins>=this.BASE_COIN_COST*(this.damageLevel+1)) {
             if (this.raiseDamageLevel()) {
                 this.setCoins(this.getCoins() - this.BASE_COIN_COST*this.damageLevel);
-                this.setDamageLevel(this.getDamageLevel() + 10);
+                this.setDamage(this.getDamage() + 10);
+                return true;
             } else {
                 System.out.println("Max damage level reached!");
+                return false;
             }
         } else {
             System.out.println("Not enough coins!");
+            return false;
         }
     }
 

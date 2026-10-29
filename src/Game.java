@@ -21,20 +21,21 @@ public class Game {
         Start.tutorial();
         Player player = Start.initializePlayer();
 
-        for (int i = 1; i<=19; i++) {
+        for (int i = 1; i<=9; i++) {            // 9 waves + last boss wave
             Fight.wave(player, false, i);
             if (Game.getGameOver()) {       //ha valahol meghal, akkor kilépünk a ciklusból és gameOver screen-t kap
                 break;
             }
-            input.getInput("Press enter to continue...");
-            System.out.println("Welcome to the upgrade hall! You can upgrade your stats here. Type 'exit' to finish upgrading and return to your next wave.");
-            Upgrade.upgradeHall(player);
+            String wait = input.getInput("Press enter to continue...");
+            while (Upgrade.upgradeHall(player)) {
+
+            }
 
         }
         if (Game.getGameOver()) {
             End.gameOverScreen(player);
         } else {
-            Fight.wave(player, true, -1);
+            Fight.wave(player, true, -1);       // the boss fight, last wave
             if (Game.getGameOver()) {
                 End.gameOverScreen(player);
             } else {

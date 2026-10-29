@@ -22,6 +22,7 @@ public class Start {
         Player player = Player.getInstance(name, 100, 10, 0);
         System.out.println("Welcome, "+ player.getName() + "! These are your starting stats:");
         player.getStats();
+        System.out.println("\nGet ready for the first wave!");
         input.getInput("Press enter to continue...");
         return player;
     }
@@ -31,8 +32,9 @@ public class Start {
         System.out.println("You have to type in your choice exactly as shown.");        //could ignore caseSensitivity
         System.out.println("Between fights you'll have the chance to upgrade your skills to become stronger.");
         ArrayList<String> options = new ArrayList<>(List.of("start", "exit"));
-        String start= input.getInput("Let's see if you get it! Type in 'start' to start the game or 'exit' to exit the game ( start exit )\n", options);
+        String start= input.getInput("\nLet's see if you get it! Type in 'start' to start the game or 'exit' to exit the game", options);
         if (start.equals("exit")) {
+            System.out.println("Well, then game is over. We'll wait for your return!");
             System.exit(0);
         }
     }

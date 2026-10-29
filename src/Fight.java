@@ -76,6 +76,7 @@ public class Fight {
             System.out.println();
             if (Math.random() < shapeshifter.getChanceToDodge()) {
                 System.out.println(shapeshifter.getName() + " takes on the appearance of a loved one. Your hands tremble and you miss.");
+                player.setIncreasedDamage(false);       //if we miss with salt, then the increased damage is gone too
             }
             else {
                 player.attack(shapeshifter);
@@ -122,6 +123,10 @@ public class Fight {
             if (!player.isAlive()) {return OutCome.ENEMYWIN;}
             System.out.println(leviathan.getName() + " is healing!");
             leviathan.heal(leviathan.getAmountHealed());
+            if (player.isUseSalt()) {
+                player.setIncreasedDamage(true);
+                player.setUseSalt(false);
+            }
             return OutCome.NONE;
         }
     }
@@ -136,26 +141,23 @@ public class Fight {
             System.out.println("Wave " + waveCount + "\n");
         }
         if (boss) {
-            enemy= new Leviathan("Leviathan", 200, 20);
+            enemy= new Leviathan("Leviathan", 150, 10);
+            System.out.println("You stumble upon a... wait. You haven't seen one like it before. A leviathan!");
         }
         else {
-            int choice = (int) (Math.random() * 3);       //nem lehet harom vagy tobb
-            if (choice == 0) {
-                enemy = new Vampire("Vampire", 50, 5);        //Could be configured to have it read from a file
+            enemy=EnemyFactory.createRandomEnemy();
+            if (enemy.getType()==EnemyType.VAMPIRE) {
                 System.out.println("You stumble upon a vampire!");
-            } else if (choice == 1) {
-                enemy = new Shapeshifter("Shapeshifter", 70, 7);
-                System.out.println("You stumble upon a shapeshifter!");
-            } else {
-                enemy = new Demon("Demon", 80, 6);
+            } else if (enemy.getType()==EnemyType.DEMON) {
                 System.out.println("You stumble upon a demon!");
+            } else {
+                System.out.println("You stumble upon a shapeshifter!");
             }
         }
 
         OutCome win=OutCome.NONE;
         do {
-            //Misc.screenSpace();
-            System.out.println("Your stats:");
+            System.out.println("\nYour stats:");
             player.getStats();
             System.out.println("\nYour enemy's stats:");
             enemy.getStats();
@@ -166,10 +168,10 @@ public class Fight {
             if (Objects.equals(choice, "attack")) {
                 //nothing because this is the standard
             }
-            else if (Objects.equals(choice, "eat")) {       //enemy should still attack?
-                player.heal(20);
+            else if (Objects.equals(choice, "eat")) {
+                player.heal((int)(player.getMaxHp()/4));
                 player.setEating(true);
-                //Misc.screenSpace();
+
                 System.out.println("Your hp: " + player.getHp() + "/" + player.getMaxHp());
 
             }
@@ -182,19 +184,16 @@ public class Fight {
 
         } while (win==OutCome.NONE);
 
-        //Misc.screenSpace();
         if (win==OutCome.PLAYERWIN) {
-            System.out.println(enemy.getName() + " falls to the ground! Another win for " + player.getName());
-            player.addCoins((int) (5*Game.getDifficulty()));
-            System.out.println("You obtained " + (int) (5*Game.getDifficulty()) + " coins.");
+            System.out.println();
+            System.out.println(enemy.getName() + " falls to the ground! Another win for " + player.getName() + "!");
+            player.addCoins((int) (6*Game.getDifficulty()));
+            System.out.println("You obtained " + (int) (6*Game.getDifficulty()) + " coins.");
             Game.raiseDifficulty();
         } else {
-            System.out.println("You lose the game."); // instead of this, GameOver screen
             Game.setGameOver(true);
 
         }
-
-
 
     }
 }
