@@ -12,6 +12,9 @@ public abstract class Enemy extends Entity {
 
     public EnemyType getType() {return this.type;}
     public int getID() {return this.ID;}
+    public static int getEnemyCount() {     //ne kelljen, hogy létezzen belőle ahhoz, hogy lekérdezzem, hogy mennyit hoztam létre eddig?
+        return EnemyCount;
+    }
 
     public void getStats() {
         System.out.println("Name: " + this.getName());

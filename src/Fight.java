@@ -73,15 +73,16 @@ public class Fight {
             player.setEating(false);
         } else {
             System.out.println("You attack " + shapeshifter.getName() + "!");
+            System.out.println();
+            if (Math.random() < shapeshifter.getChanceToDodge()) {
+                System.out.println(shapeshifter.getName() + " takes on the appearance of a loved one. Your hands tremble and you miss.");
+            }
+            else {
+                player.attack(shapeshifter);
+            }
         }
 
-        System.out.println();
-        if (Math.random() < shapeshifter.getChanceToDodge()) {
-            System.out.println(shapeshifter.getName() + " takes on the appearance of a loved one. Your hands tremble and you miss.");
-        }
-        else {
-            player.attack(shapeshifter);
-        }
+
         if (!shapeshifter.isAlive()) { return OutCome.PLAYERWIN; }
         else {
             System.out.println();
@@ -125,9 +126,15 @@ public class Fight {
         }
     }
 
-    public static void wave(Player player, boolean boss) {      //valami nem jó a screenspace-el, mert healelésnél elugrik és attack lesz
+    public static void wave(Player player, boolean boss, int waveCount) {      //valami nem jó a screenspace-el, mert healelésnél elugrik és attack lesz
 
         Enemy enemy;
+        Misc.screenSpace();
+        if (waveCount == -1) {
+            System.out.println("Final wave\n");
+        } else {
+            System.out.println("Wave " + waveCount + "\n");
+        }
         if (boss) {
             enemy= new Leviathan("Leviathan", 200, 20);
         }

@@ -4,6 +4,7 @@ public abstract class Entity {
     private int maxHp;
     private int damage;
     private double defense;
+    private final double MAX_DEFENSE=0.9;
 
     public Entity(String name, int maxHp, int damage, double defense) {
         this.name = name;
@@ -21,7 +22,13 @@ public abstract class Entity {
     public int getDamage() {return damage;}
     public void setDamage(int damage) {this.damage = damage;}
     public double getDefense() {return defense;}
-    public void setDefense(double defense) {this.defense = defense;}
+    public void setDefense(double defense) {
+        this.defense = defense;
+        if (this.defense >this.MAX_DEFENSE) {        //maximum a sebzés 90 százalákát lehet blokkolni
+            this.defense = this.MAX_DEFENSE;
+        }
+    }
+    public double getMaxDefense() {return MAX_DEFENSE;}
 
     public void attack(Entity target) {
         int amount = (int) (this.getDamage()-this.getDamage()*target.getDefense());

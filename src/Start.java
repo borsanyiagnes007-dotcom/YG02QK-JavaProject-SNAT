@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public class Start {
     private static Input input = new Input();
 
@@ -19,6 +22,18 @@ public class Start {
         Player player = Player.getInstance(name, 100, 10, 0);
         System.out.println("Welcome, "+ player.getName() + "! These are your starting stats:");
         player.getStats();
+        input.getInput("Press enter to continue...");
         return player;
+    }
+
+    public static void tutorial() {
+        System.out.println("In this game, you are going to fight your way through monsters. You control your actions by typing in the terminal what you want to do.\nYou can choose from the options in brackets separated by space. For example: ( attack eat )");
+        System.out.println("You have to type in your choice exactly as shown.");        //could ignore caseSensitivity
+        System.out.println("Between fights you'll have the chance to upgrade your skills to become stronger.");
+        ArrayList<String> options = new ArrayList<>(List.of("start", "exit"));
+        String start= input.getInput("Let's see if you get it! Type in 'start' to start the game or 'exit' to exit the game ( start exit )\n", options);
+        if (start.equals("exit")) {
+            System.exit(0);
+        }
     }
 }

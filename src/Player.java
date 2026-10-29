@@ -4,6 +4,14 @@ public class Player extends Entity implements CanHeal{
     private boolean isEating;
     private boolean useSalt;
     private boolean increasedDamage;
+    private final int BASE_COIN_COST=3;
+
+    private int defenseLevel=0;
+    private int healthLevel=0;
+    private int damageLevel=0;
+    private final static int MAX_DEFENSE_LEVEL=10;
+    private final static int MAX_HEALTH_LEVEL=10;
+    private final static int MAX_DAMAGE_LEVEL=10;
 
 
     private Player(String name, int maxHp, int damage, double defense) {
@@ -38,7 +46,86 @@ public class Player extends Entity implements CanHeal{
     }
     public void setIncreasedDamage(boolean increasedDamage){ this.increasedDamage = increasedDamage; }
 
+    // for upgrades ***********************************************************************************
+    public int getBASE_COIN_COST(){return BASE_COIN_COST;}
+    public  int getDamageLevel(){return damageLevel;}
+    public boolean raiseDamageLevel(){
+        if (this.damageLevel>=MAX_DAMAGE_LEVEL){
+            return false;
+        }
+        this.damageLevel++;
+        return true;
+    }
+    public void setDamageLevel(int damageLevel){this.damageLevel = damageLevel;}
 
+    public int getHealthLevel(){return healthLevel;}
+    public void setHealthLevel(int healthLevel){this.healthLevel = healthLevel;}
+    public boolean raiseHealthLevel(){
+        if (this.healthLevel>=MAX_HEALTH_LEVEL){
+            return false;
+        }
+        this.healthLevel++;
+        return true;
+    }
+
+    public int getDefenseLevel(){return defenseLevel;}
+    public void setDefenseLevel(int defenseLevel){this.defenseLevel = defenseLevel;}
+    public boolean raiseDefenseLevel(){
+        if (this.defenseLevel>=MAX_DEFENSE_LEVEL){
+            return false;
+        }
+        this.defenseLevel++;
+        return true;
+    }
+
+    public int getMaxDefenseLevel(){return MAX_DEFENSE_LEVEL;}
+    public int getMaxHealthLevel(){return MAX_HEALTH_LEVEL;}
+    public int getMaxDamageLevel(){return MAX_DAMAGE_LEVEL;}
+
+
+    public void upgradeDefense() {      //each level raises defense in a linear way until max defense raised
+        if (this.coins>=this.BASE_COIN_COST*(this.defenseLevel+1)) {
+            if (this.raiseDefenseLevel()) {
+                this.setCoins(this.getCoins() - this.BASE_COIN_COST*this.defenseLevel);
+                this.setDefense(this.getMaxDefense()/this.getMaxDefenseLevel()*this.getDefenseLevel());
+            } else {
+                System.out.println("Max defense level reached!");
+            }
+        } else {
+            System.out.println("Not enough coins!");
+        }
+    }
+
+    public void upgradeHealth() {       //each level adds 50 hp to your health
+        if (this.coins>=this.BASE_COIN_COST*(this.healthLevel+1)) {
+            if (this.raiseHealthLevel()) {
+                this.setCoins(this.getCoins() - this.BASE_COIN_COST*this.healthLevel);
+                this.setMaxHp(this.getMaxHp() + 50);
+                this.setHp(this.getHp()+50);
+            } else {
+                System.out.println("Max health level reached!");
+            }
+        } else {
+            System.out.println("Not enough coins!");
+        }
+    }
+
+    public void upgradeDamage() {
+        if (this.coins>=this.BASE_COIN_COST*(this.damageLevel+1)) {
+            if (this.raiseDamageLevel()) {
+                this.setCoins(this.getCoins() - this.BASE_COIN_COST*this.damageLevel);
+                this.setDamageLevel(this.getDamageLevel() + 10);
+            } else {
+                System.out.println("Max damage level reached!");
+            }
+        } else {
+            System.out.println("Not enough coins!");
+        }
+    }
+
+
+
+    //**********************************************************************************
 
     @Override
     public void heal(int amount) {
@@ -68,12 +155,6 @@ public class Player extends Entity implements CanHeal{
         target.takeDamage(amount);
         System.out.println(this.getName() + " attacks! " + target.getName() + " takes " + amount + " damage!");
 
-        /*
-        if (useSalt) {
-            lose= (int) (lose*2.5);
-            useSalt=false;
-        }
-        */
 
     }
 }
