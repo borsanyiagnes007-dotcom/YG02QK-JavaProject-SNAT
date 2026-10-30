@@ -30,9 +30,12 @@ public class Player extends Entity implements CanHeal{
     }
 
     //új játékos létrehozása
-    public static void newPlayer(String name, int maxHp, int damage, double defense) {
+    public static Player newPlayer(String name, int maxHp, int damage, double defense) {
         instance = new Player(name, maxHp, damage, defense);
+        return instance;
     }
+
+
 
     public int getCoins(){return coins;}
     public void setCoins(int coins) {this.coins = coins;}

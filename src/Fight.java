@@ -131,7 +131,7 @@ public class Fight {
         }
     }
 
-    public static void wave(Player player, boolean boss, int waveCount) {      //valami nem jó a screenspace-el, mert healelésnél elugrik és attack lesz
+    public static void wave(Player player, boolean boss, int waveCount) {
 
         Enemy enemy;
         Misc.screenSpace();
@@ -140,20 +140,21 @@ public class Fight {
         } else {
             System.out.println("Wave " + waveCount + "\n");
         }
-        if (boss) {
-            enemy= new Leviathan("Leviathan", 150, 10);
+
+        enemy=EnemyFactory.createRandomEnemy(boss);
+        if (enemy.getType()==EnemyType.VAMPIRE) {
+            System.out.println("You stumble upon a vampire!");
+        }
+        if (enemy.getType()==EnemyType.DEMON) {
+            System.out.println("You stumble upon a demon!");
+        }
+        if (enemy.getType()==EnemyType.SHAPESHIFTER) {
+            System.out.println("You stumble upon a shapeshifter!");
+        }
+        if (enemy.getType()==EnemyType.LEVIATHAN) {
             System.out.println("You stumble upon a... wait. You haven't seen one like it before. A leviathan!");
         }
-        else {
-            enemy=EnemyFactory.createRandomEnemy();
-            if (enemy.getType()==EnemyType.VAMPIRE) {
-                System.out.println("You stumble upon a vampire!");
-            } else if (enemy.getType()==EnemyType.DEMON) {
-                System.out.println("You stumble upon a demon!");
-            } else {
-                System.out.println("You stumble upon a shapeshifter!");
-            }
-        }
+
 
         OutCome win=OutCome.NONE;
         do {
@@ -185,6 +186,7 @@ public class Fight {
         } while (win==OutCome.NONE);
 
         if (win==OutCome.PLAYERWIN) {
+            Game.waveWon();
             System.out.println();
             System.out.println(enemy.getName() + " falls to the ground! Another win for " + player.getName() + "!");
             player.addCoins((int) (6*Game.getDifficulty()));

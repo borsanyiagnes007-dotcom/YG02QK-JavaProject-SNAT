@@ -5,7 +5,7 @@ public class End {
         System.out.println(File.load("textfiles/gameOverScreen.txt"));
         System.out.println("Sadly, you couldn't fight your way through the monsters. Better luck next time.");
         System.out.println("Thanks for playing!");
-        End.finalStats(player, false);
+        End.finalStats(player);
     }
 
 
@@ -14,15 +14,12 @@ public class End {
         System.out.println(File.load("textfiles/gameWinScreen.txt"));
         System.out.println("You defeated all the monsters and now you can rest finally.");
         System.out.println("Thanks for playing!");
-        End.finalStats(player, true);
+        End.finalStats(player);
     }
 
-    public static void finalStats(Player player, boolean success) {
-        if  (success) {
-            System.out.println("\nEnemies killed: " + (Enemy.getEnemyCount()));
-        } else {
-            System.out.println("\nEnemies killed: " + (Enemy.getEnemyCount()-1));       //az utolsón kívűl mindegyiket megölte
-        }
+    public static void finalStats(Player player) {
+        System.out.println("\nEnemies killed: " + Game.getWavesDefeated());
+
 
         //could be overall taken damage or something?
         System.out.println("Your last statistics:");

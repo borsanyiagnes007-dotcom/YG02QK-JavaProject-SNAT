@@ -10,10 +10,17 @@ public abstract class Enemy extends Entity {
         this.ID=EnemyCount;
     }
 
+    public static void setEnemyCount(int set) {
+        EnemyCount=set;
+    }
+
     public EnemyType getType() {return this.type;}
     public int getID() {return this.ID;}
     public static int getEnemyCount() {     //ne kelljen, hogy létezzen belőle ahhoz, hogy lekérdezzem, hogy mennyit hoztam létre eddig?
         return EnemyCount;
+    }
+    public static void resetEnemyCount() {
+        EnemyCount=0;
     }
 
     public void getStats() {

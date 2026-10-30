@@ -6,7 +6,7 @@ public class Upgrade {
 
     public static boolean upgradeHall(Player player) {      //boolean, ez false, ha kilépünk az upgrade-ből
         Misc.screenSpace();
-        System.out.println("Welcome to the upgrade hall! You can upgrade your stats here. Type 'exit' to finish upgrading and return to your next wave.\n");
+        System.out.println("Welcome to the upgrade hall! You can upgrade your stats here. Type 'done' to finish upgrading and return to your next wave. Type 'exit' to save and quit the game.\n");
         System.out.println("Here are your stats: ");
         player.getStats();
         System.out.println("Here's what you can upgrade:\n");
@@ -18,7 +18,7 @@ public class Upgrade {
         System.out.println("Damage\t\t" + checkLevel(player.getDamageLevel(), player.getMaxDamageLevel()) + " LVL\t\t" +  player.getBASE_COIN_COST()*(player.getDamageLevel()+1) + " coins");
         System.out.println();
 
-        ArrayList<String> options = new ArrayList<>(List.of("defense", "health", "damage", "exit"));
+        ArrayList<String> options = new ArrayList<>(List.of("defense", "health", "damage", "done", "exit"));
         String choice = input.getInput("What would you like to upgrade?", options);
         Misc.screenSpace();
         if (choice.equals("defense")) {
@@ -31,11 +31,12 @@ public class Upgrade {
             }
         } else if (choice.equals("damage")) {
             if (!player.upgradeDamage()) {
-
                 input.getInput("Press enter to return to upgrade hall...");
             }
-        } else {
+        } else if (choice.equals("done")) {
             return false;
+        } else {
+            Game.saveAndExit(player);
         }
         return true;
     }
