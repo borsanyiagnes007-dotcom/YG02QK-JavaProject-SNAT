@@ -96,18 +96,18 @@ public class SaveData  implements Comparable<SaveData>{
         System.out.println("Enemies defeated: " + enemyCount);
     }
 
-    public Player createPlayer() {
-        Player player = Player.newPlayer(name, maxHp, damage, defense);
+    public Player createPlayer() {      //egy save betöltése
+        Player player = Player.newPlayer(this.name, this.maxHp, this.damage, this.defense);
 
-        player.setHp(hp);
-        player.setHealthLevel(healthLevel);
-        player.setDamageLevel(damageLevel);
-        player.setDefenseLevel(defenseLevel);
-        player.setCoins(coins);
+        player.setHp(this.hp);
+        player.setHealthLevel(this.healthLevel);
+        player.setDamageLevel(this.damageLevel);
+        player.setDefenseLevel(this.defenseLevel);
+        player.setCoins(this.coins);
 
-        Game.setDifficulty(difficulty);
-        Game.setWavesDefeated(wavesDefeated);
-        Enemy.setEnemyCount(enemyCount);
+        Game.setDifficulty(this.difficulty);
+        Game.setWavesDefeated(this.wavesDefeated);
+        Enemy.setEnemyCount(this.enemyCount);
 
         return player;
     }

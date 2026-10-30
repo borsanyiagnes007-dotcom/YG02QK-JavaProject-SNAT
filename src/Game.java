@@ -14,7 +14,7 @@ public class Game {
     public static double getDifficulty() {
         return difficulty;
     }
-    public static void setDifficulty(double difficulty) {}
+    public static void setDifficulty(double difficulty) {Game.difficulty=difficulty;}
     public static boolean getGameOver() {
         return gameOver;
     }
@@ -40,18 +40,23 @@ public class Game {
         boolean newGame = true;
         if (!saves.isEmpty()) {
             ArrayList<String> options = new ArrayList<>(List.of("saves", "new"));
-            String choice = input.getInput("I found saved game(s). Would you like to load or edit a save state?", options);
-            if (choice.equals("saves")) {
-                player = Game.loadGameScreen(saves);
-                if (player == null) {
-                    newGame = true;
+            do {
+                Misc.screenSpace();
+                String choice = input.getInput("Would you like to load or edit a save or start a new game?", options);
+                if (choice.equals("saves")) {
+                    player = Game.loadGameScreen(saves);
+                    if (player == null) {       //visszamenjek az új játék lehetőséghez
+                        newGame = false;
+                    } else {
+                        newGame = false;
+                        break;
+                    }
                 } else {
-                    newGame = false;
+                    newGame = true;
                 }
-            }
+            } while (!newGame);
         }
         if (newGame){
-            System.out.println("Starting new game!");
             player = Start.initializePlayer();
         }
 
@@ -61,7 +66,7 @@ public class Game {
                 newGame=true;       // ezt utána már nem használom, tehát csak ennek a kiküszöbölésére használom
             }
             while (Game.getWavesDefeated()<9) {            // 9 waves + last boss wave
-                Fight.wave(player, false, Game.getWavesDefeated());
+                Fight.wave(player, false, Game.getWavesDefeated()+1);
                 if (Game.getGameOver()) {       //ha valahol meghal, akkor kilépünk a ciklusból és gameOver screen-t kap
                     break;
                 }
@@ -120,7 +125,7 @@ public class Game {
             for (String line : saves) {
                 saveDataList.add(new SaveData(line));
             }
-            Collections.sort(saveDataList);         // automatikusan a compareTo() metódust használja
+            //Collections.sort(saveDataList);         // automatikusan a compareTo() metódust használja
 
             System.out.println("========== SAVED GAMES ==========");
 
@@ -131,6 +136,7 @@ public class Game {
 
             if (saveDataList.isEmpty()) {
                 System.out.println("There are no saves!");
+                input.getInput("Press enter to go back...");
                 return null;
             }
 
@@ -157,12 +163,11 @@ public class Game {
                     }
                 }
 
-                String deleteChoice = input.getInput(
-                        "Which save do you want to delete?", deleteOptions);
+                String deleteChoice = input.getInput("Which save do you want to delete?", deleteOptions);
 
                 int index = Integer.parseInt(deleteChoice) - 1;
 
-                File.deleteLine("textfiles/saves.txt", index);
+                File.deleteLine("/textfiles/saves.txt", index);
                 saves.remove(index);
 
                 System.out.println("Save deleted!");
