@@ -1,3 +1,4 @@
+
 public class Player extends Entity implements CanHeal{
     private static Player instance;
     private int coins;

@@ -1,4 +1,5 @@
-public class Demon extends Enemy{
+
+public class Demon extends Enemy {
     private static final double CHANCE_TO_POSSES=0.5;
 
 

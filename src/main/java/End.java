@@ -1,8 +1,9 @@
+
 public class End {
 
     public static void gameOverScreen(Player player) {
         Misc.screenSpace();
-        System.out.println(File.load("textfiles/gameOverScreen.txt"));
+        System.out.println(File.load("src/main/resources/textfiles/gameOverScreen.txt"));
         System.out.println("Sadly, you couldn't fight your way through the monsters. Better luck next time.");
         System.out.println("Thanks for playing!");
         End.finalStats(player);
@@ -11,7 +12,7 @@ public class End {
 
     public static void gameWinScreen(Player player) {
         Misc.screenSpace();
-        System.out.println(File.load("textfiles/gameWinScreen.txt"));
+        System.out.println(File.load("src/main/resources/textfiles/gameWinScreen.txt"));
         System.out.println("You defeated all the monsters and now you can rest finally.");
         System.out.println("Thanks for playing!");
         End.finalStats(player);

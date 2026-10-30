@@ -1,4 +1,5 @@
-//ezek a file műveletek mint az írás és olvasás
+//ezek a file műveletek, mint az írás és olvasás
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,7 +12,7 @@ public class File {
 
     public static String load(String path) {
         try {
-            String content = Files.readString(Path.of("src", path));
+            String content = Files.readString(Path.of(path));
             return content;
         } catch (IOException e) {
             return "Couldn't load " + path;
@@ -21,7 +22,7 @@ public class File {
 
     public static List<String> readLines(String path) {
         try {
-            return Files.readAllLines(Path.of("src", path));
+            return Files.readAllLines(Path.of(path));
         } catch (IOException e) {
             return new ArrayList<>();
         }
@@ -30,7 +31,7 @@ public class File {
     public static void addLine(String path, String line) {
         try {
             Files.writeString(
-                    Path.of("src", path),
+                    Path.of(path),
                     line + System.lineSeparator(),
                     StandardOpenOption.CREATE,
                     StandardOpenOption.APPEND
@@ -42,8 +43,8 @@ public class File {
 
 
     public static void deleteLine(String fileName, int index) {
-        Path path = Path.of("src" + fileName);
-        //System.out.println("File location: " + path.toAbsolutePath());
+        Path path = Path.of(fileName);
+        //System.out.println("main.java.File location: " + path.toAbsolutePath());
         try {
             List<String> lines = Files.readAllLines(path);
 
@@ -74,7 +75,7 @@ public class File {
         Path path = Path.of("src/" + fileName);
 
         try {
-            System.out.println("File location: " + path.toAbsolutePath());
+            System.out.println("main.java.File location: " + path.toAbsolutePath());
 
             List<String> lines = Files.readAllLines(path);
 

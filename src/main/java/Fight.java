@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -8,7 +9,7 @@ public class Fight {
     //overload, mert a harc mechanikája változik az ellenféltől függően
     // a visszatérési érték Outcome típusú, ami megmondja, hogy meghalt-e valamelyik fél és ha igen, melyik.
     public static OutCome fight(Player player, Vampire vampire) {
-        //Misc.screenSpace();
+        //main.java.Misc.screenSpace();
         if (player.isEating() || player.isUseSalt()) {        //ha eszek, nem támadok de engem támadnak
             player.setEating(false);
         } else {
@@ -35,7 +36,7 @@ public class Fight {
     }
 
     public static OutCome fight(Player player, Demon demon) {
-        //Misc.screenSpace();
+        //main.java.Misc.screenSpace();
         if (player.isEating() || player.isUseSalt()) {
             player.setEating(false);
         } else {
@@ -68,7 +69,7 @@ public class Fight {
     }
 
     public static OutCome fight (Player player, Shapeshifter shapeshifter) {
-        //Misc.screenSpace();
+        //main.java.Misc.screenSpace();
         if (player.isEating() ||  player.isUseSalt()) {
             player.setEating(false);
         } else {
@@ -102,7 +103,7 @@ public class Fight {
     }
 
     public static OutCome fight (Player player, Leviathan leviathan) {
-        //Misc.screenSpace();
+        //main.java.Misc.screenSpace();
         if (player.isEating() || player.isUseSalt()) {
             player.setEating(false);
         } else {
@@ -130,6 +131,10 @@ public class Fight {
             return OutCome.NONE;
         }
     }
+
+
+
+
 
     public static void wave(Player player, boolean boss, int waveCount) {
 

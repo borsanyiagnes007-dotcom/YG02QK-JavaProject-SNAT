@@ -1,3 +1,4 @@
+
 public abstract class Enemy extends Entity {
     private final EnemyType type;
     private static int EnemyCount=0;

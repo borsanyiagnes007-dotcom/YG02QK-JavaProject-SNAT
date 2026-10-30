@@ -1,3 +1,4 @@
+
 public class Leviathan extends Enemy implements CanHeal{        //This will be the Boss
     private static final double CHANCE_TO_DOUBLEHIT=0.3;    //has a chance to attack 2 or 3 times instead of one
     private static final int AMOUNT_HEALED=5;

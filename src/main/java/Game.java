@@ -1,6 +1,6 @@
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Collections;
 
 public class Game {
     private static double difficulty=1;
@@ -36,7 +36,7 @@ public class Game {
         Start.startScreen();
         Start.tutorial();
         Player player = null;
-        List<String> saves = File.readLines("textfiles/saves.txt");
+        List<String> saves = File.readLines("saves/saves.txt");
         boolean newGame = true;
         if (!saves.isEmpty()) {
             ArrayList<String> options = new ArrayList<>(List.of("saves", "new"));
@@ -99,7 +99,7 @@ public class Game {
     }
 
     public static Player resetGame(Player player) {         //Facade?
-        difficulty=1;
+        Game.setDifficulty(1);
         gameOver=false;
         Game.resetWaves();
         System.out.println("Welcome, " + player.getName() + "! Get ready for the first wave!");
@@ -111,7 +111,7 @@ public class Game {
     public static void saveAndExit(Player player) {
         SaveData data = new SaveData(player);
         Misc.screenSpace();
-        File.addLine("textfiles/saves.txt", data.toFileString());
+        File.addLine("saves/saves.txt", data.toFileString());
         System.out.println("Your save file has been saved! Good bye!");
         System.exit(0);
     }
@@ -167,7 +167,7 @@ public class Game {
 
                 int index = Integer.parseInt(deleteChoice) - 1;
 
-                File.deleteLine("/textfiles/saves.txt", index);
+                File.deleteLine("saves/saves.txt", index);
                 saves.remove(index);
 
                 System.out.println("Save deleted!");

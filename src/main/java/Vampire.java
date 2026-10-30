@@ -15,6 +15,7 @@ public class Vampire extends Enemy implements CanHeal{
         }
     }
     public double getChanceToDrink() {return CHANCE_TO_DRINK;}
+
     public int getAmountHealed() {return AMOUNT_HEALED;}
 
     @Override

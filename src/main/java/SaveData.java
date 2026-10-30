@@ -120,7 +120,7 @@ public class SaveData  implements Comparable<SaveData>{
     }
 
 
-    @Override
+    @Override       //nem használom, de lehetne
     public int compareTo(SaveData other) {      //a mentéseket a teljesített hullámok száma szerint szeretném sorrendbe rakni
         return Integer.compare(other.wavesDefeated, this.wavesDefeated);
     }
