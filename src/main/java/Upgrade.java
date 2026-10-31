@@ -36,7 +36,7 @@ public class Upgrade {
         } else if (choice.equals("done")) {
             return false;
         } else {
-            Game.saveAndExit(player);
+            Saves.saveAndExit(player);
         }
         return true;
     }

@@ -20,6 +20,35 @@ public class Vampire extends Enemy implements CanHeal{
 
     @Override
     public OutCome fight(Player player) {
-        return Fight.fight(player, this);
+        //main.java.Misc.screenSpace();
+        if (player.isEating() || player.isUseSalt()) {        //ha eszek, nem támadok de engem támadnak
+            player.setEating(false);
+        } else {
+            player.attack(this);
+        }
+        System.out.println();
+        if (!this.isAlive()) { return OutCome.PLAYERWIN;}
+        else {
+            //System.out.println(vampire.getName() + " is attacking!");
+            if (Math.random() < this.getChanceToDrink()) {
+                System.out.println(this.getName() + " bites you and drinks your blood! It heals!");
+                this.heal(this.getAmountHealed());
+            }
+            this.attack(player);
+            if (!player.isAlive()) {
+                return OutCome.ENEMYWIN;
+            }
+        }
+        if (player.isUseSalt())  {          //átkapcsolom, hogy következő körben támadjon erősen
+            player.setIncreasedDamage(true);
+            player.setUseSalt(false);
+        }
+        return OutCome.NONE;
     }
+
+    @Override
+    public void meetText() {
+        System.out.println("You stumble upon a vampire!");
+    }
+
 }

@@ -25,6 +25,37 @@ public class Leviathan extends Enemy implements CanHeal{        //This will be t
 
     @Override
     public OutCome fight(Player player) {
-        return Fight.fight(player, this);
+        //main.java.Misc.screenSpace();
+        if (player.isEating() || player.isUseSalt()) {
+            player.setEating(false);
+        } else {
+            player.attack(this);
+        }
+
+        System.out.println();
+        if (!this.isAlive()) { return OutCome.PLAYERWIN; }
+        else {
+            if (Math.random() < this.getChanceToDoublehit()) {
+                System.out.println("Huge black tentacles spread from " + this.getName() + ". Look out! They are coming from every direction!");
+                for (int i=0; i<(int)(Math.random()*2)+1;i++) {
+                    this.attack(player);
+                    if (!player.isAlive()) {return OutCome.ENEMYWIN;}
+                }
+            }
+            this.attack(player);
+            if (!player.isAlive()) {return OutCome.ENEMYWIN;}
+            System.out.println(this.getName() + " is healing!");
+            this.heal(this.getAmountHealed());
+            if (player.isUseSalt()) {
+                player.setIncreasedDamage(true);
+                player.setUseSalt(false);
+            }
+            return OutCome.NONE;
+        }
+    }
+
+    @Override
+    public void meetText() {
+        System.out.println("You stumble upon a... wait. You haven't seen one like it before. A leviathan!");
     }
 }

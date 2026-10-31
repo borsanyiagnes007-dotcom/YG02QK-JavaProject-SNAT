@@ -31,6 +31,7 @@ public abstract class Enemy extends Entity {
         System.out.println(Misc.getDescription(this));
     }
 
-    public abstract OutCome fight(Player player);
+    public abstract OutCome fight(Player player);       //every enemy has different fight mechanic
+    public abstract void meetText();
 
 }

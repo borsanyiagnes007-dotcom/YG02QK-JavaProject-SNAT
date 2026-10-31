@@ -5,7 +5,7 @@ public abstract class Entity {
     private int maxHp;
     private int damage;
     private double defense;
-    private final double MAX_DEFENSE=0.9;
+    private static final double MAX_DEFENSE=0.9;
 
     public Entity(String name, int maxHp, int damage, double defense) {
         this.name = name;

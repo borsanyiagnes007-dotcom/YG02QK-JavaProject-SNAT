@@ -2,9 +2,13 @@
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SaveData  implements Comparable<SaveData>{
     private String name;
+    private final int Id;
+    private static int nextId=0;
     private int maxHp;
     private int hp;
     private int damage;
@@ -32,6 +36,7 @@ public class SaveData  implements Comparable<SaveData>{
         this.wavesDefeated = Game.getWavesDefeated();
         this.enemyCount = Enemy.getEnemyCount();
         this.savedAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.Id = nextId++;
     }
 
     public SaveData(String line) {
@@ -50,6 +55,7 @@ public class SaveData  implements Comparable<SaveData>{
         this.wavesDefeated = Integer.parseInt(data[10]);
         this.enemyCount = Integer.parseInt(data[11]);
         this.savedAt = data[12];
+        this.Id = Integer.parseInt(data[13]);
     }
 
     public String getName(){return this.name;}
@@ -64,6 +70,9 @@ public class SaveData  implements Comparable<SaveData>{
     public double getDifficulty(){return this.difficulty;}
     public int getWavesDefeated(){return this.wavesDefeated;}
     public int getEnemyCount() {return this.enemyCount;}
+    public String getSavedAt(){return this.savedAt;}
+    public int getId(){return this.Id;}
+    public int getNextId(){return nextId;}
 
 
     public String toFileString() {
@@ -79,7 +88,8 @@ public class SaveData  implements Comparable<SaveData>{
                 difficulty + "\t" +
                 wavesDefeated + "\t" +
                 enemyCount + "\t" +
-                savedAt;
+                savedAt + "\t" +
+                Id;
     }
 
     public void print() {
@@ -120,8 +130,27 @@ public class SaveData  implements Comparable<SaveData>{
     }
 
 
-    @Override       //nem használom, de lehetne
+    @Override
     public int compareTo(SaveData other) {      //a mentéseket a teljesített hullámok száma szerint szeretném sorrendbe rakni
         return Integer.compare(other.wavesDefeated, this.wavesDefeated);
+    }
+
+    //gondoskodik arról, hogy egyedi legyen az Id, ne kezdjen újra számolni.
+    public static void updateNextId(String path) {
+        List<String> saves = File.readLines(path);
+        List<SaveData> saveDataList = new ArrayList<>();
+
+        for (String line : saves) {
+            saveDataList.add(new SaveData(line));
+        }
+
+        int maxId = -1;
+        for (SaveData save : saveDataList) {
+            if (save.getId() > maxId) {
+                maxId = save.getId();
+            }
+        }
+
+        nextId = maxId + 1;
     }
 }

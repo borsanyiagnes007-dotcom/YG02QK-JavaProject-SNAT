@@ -1,3 +1,4 @@
+import java.util.IllegalFormatWidthException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -17,6 +18,12 @@ public class Start {
         String name="";
         do {
             name= input.getInput("What is your name, brave hero? \n");
+            try {
+                validateName(name);
+            } catch (NameValidationException e) {
+                System.out.println("Invalid name: " + e.getMessage());
+                name="";
+            }
         } while (name.isEmpty());        //valami értelmes név legyen, ne lehessen üres
 
         Player player = Player.getInstance(name, 100, 10, 0);
@@ -25,6 +32,16 @@ public class Start {
         System.out.println("\nGet ready for the first wave!");
         input.getInput("Press enter to continue...");
         return player;
+    }
+
+    //name validation, it must be longer than 2 characters and less than 101
+    public static void validateName(String name) throws NameValidationException {
+        if (name.length() < 3) {
+            throw new NameValidationException("Name must be at least 3 characters!");
+        }
+        if (name.length()>100) {
+            throw new NameValidationException("Name must be at most 100 characters!");
+        }
     }
 
     public static void tutorial() {
@@ -38,4 +55,5 @@ public class Start {
             System.exit(0);
         }
     }
+
 }
