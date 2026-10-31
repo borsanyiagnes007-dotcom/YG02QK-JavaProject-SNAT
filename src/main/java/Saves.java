@@ -21,7 +21,7 @@ public class Saves {
             for (String line : saves) {
                 saveDataList.add(new SaveData(line));
             }
-            Collections.sort(saveDataList);         // automatikusan a compareTo() metódust használja?
+            Collections.sort(saveDataList);         // automatikusan a compareTo() metódust használja
 
             System.out.println("========== SAVED GAMES ==========");
 

@@ -150,7 +150,6 @@ public class SaveData  implements Comparable<SaveData>{
                 maxId = save.getId();
             }
         }
-
         nextId = maxId + 1;
     }
 }

@@ -51,4 +51,9 @@ public class Vampire extends Enemy implements CanHeal{
         System.out.println("You stumble upon a vampire!");
     }
 
+    @Override
+    public String getDescription() {
+        return "Description: A vampire drinks their opponent's blood, healing itself in the process.";
+    }
+
 }

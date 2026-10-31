@@ -49,4 +49,9 @@ public class Demon extends Enemy {
     public void meetText() {
         System.out.println("You stumble upon a demon!");
     }
+
+    @Override
+    public String getDescription() {
+        return "Description: A demon is an evil creature that likes to possess its prey and hurt them.";
+    }
 }

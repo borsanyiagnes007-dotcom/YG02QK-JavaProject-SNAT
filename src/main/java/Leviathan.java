@@ -58,4 +58,9 @@ public class Leviathan extends Enemy implements CanHeal{        //This will be t
     public void meetText() {
         System.out.println("You stumble upon a... wait. You haven't seen one like it before. A leviathan!");
     }
+
+    @Override
+    public String getDescription() {
+        return "Description: Powerful ancient creature. We don't know much about them.";
+    }
 }

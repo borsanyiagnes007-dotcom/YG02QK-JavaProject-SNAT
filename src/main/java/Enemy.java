@@ -28,10 +28,11 @@ public abstract class Enemy extends Entity {
         System.out.println("Name: " + this.getName());
         System.out.println("Health: " + this.getHp() + "/" + this.getMaxHp());
         System.out.println("Attack damage: " + this.getDamage());
-        System.out.println(Misc.getDescription(this));
+        System.out.println(this.getDescription());
     }
 
     public abstract OutCome fight(Player player);       //every enemy has different fight mechanic
     public abstract void meetText();
+    public abstract String getDescription();
 
 }

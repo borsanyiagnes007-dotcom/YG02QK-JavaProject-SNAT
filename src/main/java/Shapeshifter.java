@@ -46,4 +46,9 @@ public class Shapeshifter extends Enemy{
     public void meetText() {
         System.out.println("You stumble upon a shapeshifter!");
     }
+
+    @Override
+    public String getDescription() {
+        return "Description: A shapeshifter is a ferocious monster, capable to take on the appearance of loved ones and confuse you.";
+    }
 }
