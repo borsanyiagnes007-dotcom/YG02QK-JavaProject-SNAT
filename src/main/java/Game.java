@@ -6,7 +6,7 @@ public class Game {
     private static boolean gameOver = false;
     private static Input input = new Input();
     private static int wavesDefeated = 0;
-    private static String saveTo = "saves/saves.txt";
+    private static String saveTo = "saves.txt";
 
     public static void raiseDifficulty() {
         difficulty = difficulty * 1.2;
