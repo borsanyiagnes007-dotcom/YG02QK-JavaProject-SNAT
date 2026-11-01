@@ -12,7 +12,11 @@ public abstract class Enemy extends Entity {
     }
 
     public static void setEnemyCount(int set) {
-        EnemyCount=set;
+        if (set >=0) {
+            EnemyCount = set;
+        } else {
+            EnemyCount=0;
+        }
     }
 
     public EnemyType getType() {return this.type;}

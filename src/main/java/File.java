@@ -69,43 +69,4 @@ public class File {
             System.out.println("Error deleting save: " + e.getMessage());
         }
     }
-
-     /*
-    public static void deleteLine(String fileName, int index) {
-        Path path = Path.of("src/" + fileName);
-
-        try {
-            System.out.println("main.java.File location: " + path.toAbsolutePath());
-
-            List<String> lines = Files.readAllLines(path);
-
-            System.out.println("Lines before deletion: " + lines.size());
-
-            if (index < 0 || index >= lines.size()) {
-                System.out.println("Invalid save index!");
-                return;
-            }
-
-            System.out.println("Deleting: " + lines.get(index));
-
-            lines.remove(index);
-
-            Files.write(
-                    path,
-                    lines,
-                    StandardCharsets.UTF_8
-            );
-
-            System.out.println("Lines after deletion: " +
-                    Files.readAllLines(path).size());
-
-            System.out.println("Save deleted!");
-
-        } catch (IOException e) {
-            System.out.println("Error deleting save: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-    */
-
 }

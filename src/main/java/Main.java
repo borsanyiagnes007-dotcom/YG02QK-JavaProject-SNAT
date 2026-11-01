@@ -1,5 +1,8 @@
 //need to figure out how to merge into main again
-//need to see if I have everything the teacher requires
+
+
+
+// UML diagram, user stories, README.md file!!!!!
 
 
 

@@ -16,9 +16,15 @@ public class Game {
     public static double getDifficulty() {
         return difficulty;
     }
-    public static void setDifficulty(double difficulty) {Game.difficulty=difficulty;}
+    public static void setDifficulty(double difficulty) {
+        if (difficulty < 1) {
+            Game.difficulty = 1;
+        } else {
+            Game.difficulty = difficulty;
+        }
+    }
     public static boolean getGameOver() {
-        return gameOver;
+        return Game.gameOver;
     }
     public static void setGameOver(boolean gameOver) {
         Game.gameOver = gameOver;
@@ -32,7 +38,12 @@ public class Game {
     public static void resetWaves() {
         wavesDefeated=0;
     }
-    public static void setWavesDefeated(int set) {wavesDefeated = set;}
+    public static void setWavesDefeated(int set) {
+        if (set >= 0) {
+            wavesDefeated = set;
+        } else {wavesDefeated=0;}
+    }
+
     public static String getSaveTo() {return saveTo;}
 
     public static void gameplay() {

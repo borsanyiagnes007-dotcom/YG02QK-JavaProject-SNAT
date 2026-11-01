@@ -39,7 +39,12 @@ public class Player extends Entity implements CanHeal{
 
 
     public int getCoins(){return coins;}
-    public void setCoins(int coins) {this.coins = coins;}
+    public void setCoins(int coins) {
+        if (coins < 0) {
+            this.coins=0;
+        } else {
+        this.coins = coins;}
+        }
     public void addCoins(int coins){this.coins += coins;}
     public boolean isEating(){return isEating;}
     public void setEating(boolean isEating){this.isEating = isEating;}
@@ -60,10 +65,25 @@ public class Player extends Entity implements CanHeal{
         this.damageLevel++;
         return true;
     }
-    public void setDamageLevel(int damageLevel){this.damageLevel = damageLevel;}
-
+    public void setDamageLevel(int damageLevel) {
+        if (damageLevel < 0) {
+            this.damageLevel = 0;
+        } else if (damageLevel > MAX_DAMAGE_LEVEL) {
+            this.damageLevel = MAX_DAMAGE_LEVEL;
+        } else {
+            this.damageLevel = damageLevel;
+        }
+    }
     public int getHealthLevel(){return healthLevel;}
-    public void setHealthLevel(int healthLevel){this.healthLevel = healthLevel;}
+    public void setHealthLevel(int healthLevel) {
+        if (healthLevel < 0) {
+            this.healthLevel = 0;
+        } else if (healthLevel > MAX_HEALTH_LEVEL) {
+            this.healthLevel = MAX_HEALTH_LEVEL;
+        } else {
+            this.healthLevel = healthLevel;
+        }
+    }
     public boolean raiseHealthLevel(){
         if (this.healthLevel>=MAX_HEALTH_LEVEL){
             return false;
@@ -73,7 +93,15 @@ public class Player extends Entity implements CanHeal{
     }
 
     public int getDefenseLevel(){return defenseLevel;}
-    public void setDefenseLevel(int defenseLevel){this.defenseLevel = defenseLevel;}
+    public void setDefenseLevel(int defenseLevel) {
+        if (defenseLevel < 0) {
+            this.defenseLevel = 0;
+        } else if (defenseLevel > MAX_DEFENSE_LEVEL) {
+            this.defenseLevel = MAX_DEFENSE_LEVEL;
+        } else {
+            this.defenseLevel = defenseLevel;
+        }
+    }
     public boolean raiseDefenseLevel(){
         if (this.defenseLevel>=MAX_DEFENSE_LEVEL){
             return false;

@@ -17,17 +17,37 @@ public abstract class Entity {
 
     public String getName() {return name;}
     public int getHp() {return hp;}
-    public void setHp(int hp) {this.hp = hp;}
+    public void setHp(int hp) {
+        if (hp >=0) {
+            this.hp = hp;
+        } else if (hp < 0) {
+            this.hp = 0;
+        }
+        if (hp > maxHp) {
+            this.hp = maxHp;
+        }
+    }
     public int getMaxHp() {return maxHp;}
-    public void setMaxHp(int maxHp) {this.maxHp = maxHp;}
+    public void setMaxHp(int maxHp) {
+        if (maxHp > 0) {
+            this.maxHp = maxHp;
+        }
+    }
     public int getDamage() {return damage;}
-    public void setDamage(int damage) {this.damage = damage;}
+    public void setDamage(int damage) {
+        if (damage >=0) {
+            this.damage = damage;
+        }
+    }
     public double getDefense() {return defense;}
     public void setDefense(double defense) {
-        this.defense = defense;
-        if (this.defense >this.MAX_DEFENSE) {        //maximum a sebzés 90 százalákát lehet blokkolni
-            this.defense = this.MAX_DEFENSE;
+        if (defense >=0) {
+            this.defense = defense;
+            if (this.defense >this.getMaxDefense()) {        //maximum a sebzés 90 százalákát lehet blokkolni
+                this.defense = this.getMaxDefense();
+            }
         }
+
     }
     public double getMaxDefense() {return MAX_DEFENSE;}
 
@@ -38,7 +58,10 @@ public abstract class Entity {
     }
 
     public void takeDamage(int amount) {
-        if (this.isAlive()) {this.setHp(this.getHp() - amount);}
+        if (amount > 0) {
+            if (this.isAlive()) {this.setHp(this.getHp() - amount);}
+        }
+
     }
 
     public boolean isAlive() {

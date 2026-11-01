@@ -77,7 +77,7 @@ public class Saves {
 
                 if (fileIndex != -1) {
                     File.deleteLine(Game.getSaveTo(), fileIndex);
-                    saves.remove(index);
+                    saves.remove(fileIndex);
                     System.out.println("Save deleted!");
                 }
 
