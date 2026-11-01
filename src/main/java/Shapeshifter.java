@@ -8,8 +8,8 @@ public class Shapeshifter extends Enemy{
     public double getChanceToDodge() {return CHANCE_TO_DODGE;}
 
     @Override
-    public OutCome fight(Player player) {   //azért nem itt specifikálom, hogy a különböző harctípusok egy helyen, a main.java.Fight osztályban legyenek
-        //main.java.Misc.screenSpace();
+    public OutCome fight(Player player) {
+
         if (player.isEating() ||  player.isUseSalt()) {
             player.setEating(false);
         } else {
@@ -27,7 +27,6 @@ public class Shapeshifter extends Enemy{
         if (!this.isAlive()) { return OutCome.PLAYERWIN; }
         else {
             System.out.println();
-            //System.out.println(shapeshifter.getName() + " is attacking!");
 
             this.attack(player);
             if (!player.isAlive()) {

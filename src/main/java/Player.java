@@ -55,6 +55,7 @@ public class Player extends Entity implements CanHeal{
     }
     public void setIncreasedDamage(boolean increasedDamage){ this.increasedDamage = increasedDamage; }
 
+
     // for upgrades ***********************************************************************************
     public int getBASE_COIN_COST(){return BASE_COIN_COST;}
     public  int getDamageLevel(){return damageLevel;}
@@ -164,9 +165,8 @@ public class Player extends Entity implements CanHeal{
         }
     }
 
-
-
     //**********************************************************************************
+
 
     @Override
     public void heal(int amount) {
@@ -195,7 +195,5 @@ public class Player extends Entity implements CanHeal{
         }
         target.takeDamage(amount);
         System.out.println(this.getName() + " attacks! " + target.getName() + " takes " + amount + " damage!");
-
-
     }
 }

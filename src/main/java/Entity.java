@@ -69,6 +69,6 @@ public abstract class Entity {
         return true;
     }
 
-    public abstract void getStats();    //need to specify for main.java.Player and main.java.Enemy
+    public abstract void getStats();    //need to specify for Player and Enemy
 
 }

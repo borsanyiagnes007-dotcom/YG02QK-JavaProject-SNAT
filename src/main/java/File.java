@@ -16,7 +16,6 @@ public class File {
             return content;
         } catch (IOException e) {
             return "Couldn't load " + path;
-            //e.printStackTrace();
         }
     }
 
@@ -44,7 +43,6 @@ public class File {
 
     public static void deleteLine(String fileName, int index) {
         Path path = Path.of(fileName);
-        //System.out.println("main.java.File location: " + path.toAbsolutePath());
         try {
             List<String> lines = Files.readAllLines(path);
 
@@ -62,8 +60,6 @@ public class File {
                     StandardOpenOption.WRITE,
                     StandardOpenOption.TRUNCATE_EXISTING
             );
-
-            //System.out.println("Save deleted!");
 
         } catch (IOException e) {
             System.out.println("Error deleting save: " + e.getMessage());

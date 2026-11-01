@@ -42,7 +42,6 @@ public class Demon extends Enemy {
             }
             return OutCome.NONE;
         }
-
     }
 
     @Override

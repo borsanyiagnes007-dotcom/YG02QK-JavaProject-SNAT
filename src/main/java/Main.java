@@ -1,10 +1,4 @@
-//need to figure out how to merge into main again
-
-
-
-// UML diagram, user stories, README.md file!!!!!
-
-
+//the game can be run from here
 
 public class Main {
     public static void main(String[] args) {

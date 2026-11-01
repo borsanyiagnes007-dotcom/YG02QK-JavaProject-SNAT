@@ -46,7 +46,7 @@ public class Start {
 
     public static void tutorial() {
         System.out.println("In this game, you are going to fight your way through monsters. You control your actions by typing in the terminal what you want to do.\nYou can choose from the options in brackets separated by space. For example: ( attack eat )");
-        System.out.println("You have to type in your choice exactly as shown.");        //could ignore caseSensitivity
+        System.out.println("You have to type in your choice exactly as shown.");
         System.out.println("Between fights you'll have the chance to upgrade your skills to become stronger.");
         ArrayList<String> options = new ArrayList<>(List.of("start", "exit"));
         String start= input.getInput("\nLet's see if you get it! Type in 'start' to start the game or 'exit' to exit the game", options);

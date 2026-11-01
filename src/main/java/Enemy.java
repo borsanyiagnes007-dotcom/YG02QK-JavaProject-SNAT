@@ -5,7 +5,7 @@ public abstract class Enemy extends Entity {
     private final int ID;
 
     public Enemy(String name, int maxHp, int damage, EnemyType type) {
-        super(name, (int)(maxHp*Game.getDifficulty()), (int)(damage*Game.getDifficulty()), 0);      //Monsters don't have defense, but they could.
+        super(name, (int)(maxHp*Game.getDifficulty()), (int)(damage*Game.getDifficulty()), 0);      //Monsters don't have defense
         this.type=type;
         EnemyCount++;
         this.ID=EnemyCount;
@@ -21,7 +21,7 @@ public abstract class Enemy extends Entity {
 
     public EnemyType getType() {return this.type;}
     public int getID() {return this.ID;}
-    public static int getEnemyCount() {     //ne kelljen, hogy létezzen belőle ahhoz, hogy lekérdezzem, hogy mennyit hoztam létre eddig?
+    public static int getEnemyCount() {     //ne kelljen, hogy létezzen belőle ahhoz, hogy lekérdezzem, hogy mennyit hoztam létre eddig
         return EnemyCount;
     }
     public static void resetEnemyCount() {
