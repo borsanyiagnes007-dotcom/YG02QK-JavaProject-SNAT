@@ -23,6 +23,7 @@ public class SaveData  implements Comparable<SaveData>{
     private String savedAt;
 
     public SaveData(Player player) {
+        //működik, csak nehezen bővíthető - lehetne a player kezeli sajátját, hogy mit kell lementeni tőle, összefoglaló kéne, mint kezelő
         this.name = player.getName();
         this.maxHp = player.getMaxHp();
         this.hp = player.getHp();
@@ -58,6 +59,8 @@ public class SaveData  implements Comparable<SaveData>{
         this.Id = Integer.parseInt(data[13]);
     }
 
+
+    //fölösleges getterek nem kellenek
     public String getName(){return this.name;}
     public int getMaxHp(){return this.maxHp;}
     public int getHp(){return this.hp;}

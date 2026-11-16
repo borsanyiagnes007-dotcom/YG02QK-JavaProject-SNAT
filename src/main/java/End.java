@@ -18,7 +18,7 @@ public class End {
         End.finalStats(player);
     }
 
-    public static void finalStats(Player player) {
+    private static void finalStats(Player player) {
         System.out.println("\nEnemies killed: " + Game.getWavesDefeated());
 
 

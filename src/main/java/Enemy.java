@@ -1,7 +1,7 @@
 
 public abstract class Enemy extends Entity {
     private final EnemyType type;
-    private static int EnemyCount=0;
+    private static int EnemyCount=0;        //részben ID számozásra, részben az adott játékos összes megölt ellensége, még ha resetel is?
     private final int ID;
 
     public Enemy(String name, int maxHp, int damage, EnemyType type) {
@@ -21,6 +21,7 @@ public abstract class Enemy extends Entity {
 
     public EnemyType getType() {return this.type;}
     public int getID() {return this.ID;}
+
     public static int getEnemyCount() {     //ne kelljen, hogy létezzen belőle ahhoz, hogy lekérdezzem, hogy mennyit hoztam létre eddig
         return EnemyCount;
     }

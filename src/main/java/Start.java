@@ -35,7 +35,7 @@ public class Start {
     }
 
     //name validation, it must be longer than 2 characters and less than 101
-    public static void validateName(String name) throws NameValidationException {
+    private static void validateName(String name) throws NameValidationException {
         if (name.length() < 3) {
             throw new NameValidationException("Name must be at least 3 characters!");
         }
