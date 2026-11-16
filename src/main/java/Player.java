@@ -59,7 +59,7 @@ public class Player extends Entity implements CanHeal{
     // for upgrades ***********************************************************************************
     public int getBASE_COIN_COST(){return BASE_COIN_COST;}
     public  int getDamageLevel(){return damageLevel;}
-    public boolean raiseDamageLevel(){
+    private boolean raiseDamageLevel(){
         if (this.damageLevel>=MAX_DAMAGE_LEVEL){
             return false;
         }
@@ -75,6 +75,7 @@ public class Player extends Entity implements CanHeal{
             this.damageLevel = damageLevel;
         }
     }
+
     public int getHealthLevel(){return healthLevel;}
     public void setHealthLevel(int healthLevel) {
         if (healthLevel < 0) {
@@ -85,7 +86,7 @@ public class Player extends Entity implements CanHeal{
             this.healthLevel = healthLevel;
         }
     }
-    public boolean raiseHealthLevel(){
+    private boolean raiseHealthLevel(){
         if (this.healthLevel>=MAX_HEALTH_LEVEL){
             return false;
         }
@@ -103,7 +104,7 @@ public class Player extends Entity implements CanHeal{
             this.defenseLevel = defenseLevel;
         }
     }
-    public boolean raiseDefenseLevel(){
+    private boolean raiseDefenseLevel(){
         if (this.defenseLevel>=MAX_DEFENSE_LEVEL){
             return false;
         }

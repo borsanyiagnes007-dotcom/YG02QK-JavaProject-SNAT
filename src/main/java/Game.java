@@ -40,7 +40,7 @@ public class Game {
         return wavesDefeated;
     }
 
-    public static void resetWaves() {
+    private static void resetWaves() {
         wavesDefeated = 0;
     }
 
@@ -57,6 +57,7 @@ public class Game {
     }
 
     public static void gameplay() {
+        //initialize and saves
         Start.startScreen();
         Start.tutorial();
         SaveData.updateNextId(Game.getSaveTo());
@@ -85,6 +86,7 @@ public class Game {
             player = Start.initializePlayer();
         }
 
+        //gameplay itself
         while (true) {
             if (!newGame) {     //ha töltött játék, egyszer még a shop-ban kezdjen és onnan menjen harcolni
                 while (Upgrade.upgradeHall(player)) {
@@ -124,7 +126,7 @@ public class Game {
         }
     }
 
-    public static Player resetGame(Player player) {         //Facade?
+    private static Player resetGame(Player player) {         //Facade?
         Game.setDifficulty(1);
         gameOver = false;
         Game.resetWaves();

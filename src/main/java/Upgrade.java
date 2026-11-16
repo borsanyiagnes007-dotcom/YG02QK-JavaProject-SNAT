@@ -42,7 +42,7 @@ public class Upgrade {
     }
 
     //ha az upgrade elérte a max szintet, ezt azzal jelzem, hogy a szint helyett a "MAX" szöveget tüntetem fel.
-    public static String checkLevel(int amount, int maxAmount) {
+    private static String checkLevel(int amount, int maxAmount) {
         if (amount >= maxAmount) {
             return "MAX";
         } else {
